@@ -295,12 +295,13 @@ const RiderLogin = async (req, res) => {
         if (rider) {
             if (!(await bcrypt.compare(password, rider.password))) return invalid();
 
-            // Check admin verification status
+            // Check admin verification status — specific to THIS rider only
             if (!rider.is_verified || rider.verification_status === "pending") {
                 return res.status(403).json({
                     success: false,
                     message: "Your account is under verification. Please wait 24 - 48 hours for admin verification.",
                     underVerification: true,
+                    email: rider.email,
                 });
             }
 
