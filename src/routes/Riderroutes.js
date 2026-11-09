@@ -69,6 +69,7 @@ Riderroute.get("/rider/availability/offline", limit(30), Authmiddleware, (req, r
     return SetAvailability(req, res);
 });
 Riderroute.patch("/rider/availability", limit(15), Authmiddleware, SetAvailability);
+Riderroute.post("/rider/availability", limit(15), Authmiddleware, SetAvailability);
 
 // account deletion
 Riderroute.delete("/rider/account", limit(3), Authmiddleware, DeleteAccount);
